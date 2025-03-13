@@ -1,14 +1,12 @@
-import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import { Margin, Padding } from '@mui/icons-material';
-import { Theme } from '@mui/material/styles';
-import Badge from "@mui/material/Badge";
+import * as React from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
+import Uploading from "./Upload";
+import Text from "./Text";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -34,7 +32,7 @@ function CustomTabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -44,49 +42,33 @@ interface BasicTabsProps {
   tab3: string;
 }
 
-interface Styles {
-    textField: React.CSSProperties;
-    input: React.CSSProperties;
-}
-
-const styles = (theme: Theme): Styles => ({
-    textField: {
-        width: '90%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingBottom: 0,
-        marginTop: 0,
-        fontWeight: 500,
-    },
-    input: {
-        color: 'white',
-    },
-});
-
 // Styled Tab using theme values for both light and dark mode
 const PillTab = styled(Tab)(({ theme }) => ({
-  minHeight: '36px',
-  minWidth: '80px',
-  borderRadius: '10px',
-  textTransform: 'none',
+  minHeight: "36px",
+  minWidth: "80px",
+  borderRadius: "10px",
+  textTransform: "none",
   padding: theme.spacing(0, 2),
-  marginRight: theme.spacing(1),
+  display: "flex",
+  gap: 2,
+
+  // marginRight: theme.spacing(1),
   // Use theme palette for background and text colors based on mode
   backgroundColor:
-    theme.palette.mode === 'light'
+    theme.palette.mode === "light"
       ? theme.palette.grey[200]
       : theme.palette.grey[800],
   color:
-    theme.palette.mode === 'light'
+    theme.palette.mode === "light"
       ? theme.palette.text.primary
       : theme.palette.text.secondary,
-  '& .MuiTab-iconWrapper': {
+  "& .MuiTab-iconWrapper": {
     marginRight: theme.spacing(1),
   },
-  '&.Mui-selected': {
+  "&.Mui-selected": {
     // For selected state, use primary colors from the theme
     backgroundColor:
-      theme.palette.mode === 'light'
+      theme.palette.mode === "light"
         ? theme.palette.primary.light
         : theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
@@ -103,7 +85,7 @@ export default function BasicTabs({ tab1, tab2, tab3 }: BasicTabsProps) {
   return (
     <Box
       sx={(theme: any) => ({
-        width: "100%",
+        // width: "100%",
         p: 2,
         borderRadius: 2,
         backgroundColor: theme.palette.background.paper,
@@ -118,13 +100,18 @@ export default function BasicTabs({ tab1, tab2, tab3 }: BasicTabsProps) {
             theme.palette.mode === "light"
               ? theme.palette.grey[300]
               : theme.palette.grey[900],
-          display: "flex",
+          display: "inline-flex", // Use inline-flex for shrink wrapping
           alignItems: "center",
           borderRadius: "10px",
           "& .MuiTabs-indicator": {
             display: "none",
           },
+          // Override the flex container inside Tabs:
+          "& .MuiTabs-flexContainer": {
+            flexGrow: 0,
+          },
           p: 1,
+          width: "auto",
           marginBottom: theme.spacing(2),
         })}
       >
@@ -132,33 +119,52 @@ export default function BasicTabs({ tab1, tab2, tab3 }: BasicTabsProps) {
         <PillTab label={tab2} {...a11yProps(1)} />
         <PillTab label={tab3} {...a11yProps(2)} />
       </Tabs>
-
-      <CustomTabPanel value={value} index={0} >
+      <CustomTabPanel value={value} index={0}>
         <TextField
           fullWidth
           label="URL"
           id="fullWidth"
-          placeholder='https://example.com/your-url'
+          placeholder="https://example.com/your-url"
           sx={{
             "& .css-1waddqg-MuiInputBase-input-MuiOutlinedInput-input": {
-                padding: "10.5px 7.23px",
+              padding: "10.5px 7.23px",
             },
             "& .css-kbp9eo-MuiFormLabel-root-MuiInputLabel-root": {
-                fontSize: "0.8rem",
-                lineHeight: "1.2em",
+              fontSize: "0.8rem",
+              lineHeight: "1.2em",
             },
           }}
-
         />
-    <Button variant={"contained"} color={"primary"} fullWidth sx={{ mt: 2, maxWidth: '95%', display: 'block', marginX: 'auto' }}>
-        Summarize Now
-    </Button>
+        <Button
+          variant={"contained"}
+          color={"primary"}
+          fullWidth
+          sx={{ mt: 2, maxWidth: "100%", display: "block", marginX: "auto" }}
+        >
+          Summarize Now
+        </Button>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        {tab2} content here
+        <Uploading />
+        <Button
+          variant={"contained"}
+          color={"primary"}
+          fullWidth
+          sx={{ mt: 2, maxWidth: "100%", display: "block", marginX: "auto" }}
+        >
+          Summarize Now
+        </Button>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        {tab3} content here
+        <Text />
+        <Button
+          variant={"contained"}
+          color={"primary"}
+          fullWidth
+          sx={{ mt: 2, maxWidth: "100%", display: "block", marginX: "auto" }}
+        >
+          Summarize Now
+        </Button>
       </CustomTabPanel>
     </Box>
   );

@@ -9,7 +9,6 @@ import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import ReviewsIcon from '@mui/icons-material/Reviews';
-import Grid from '@mui/material/Grid2';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import Tabs from './components/tabs';
 
@@ -83,13 +82,6 @@ function useDemoRouter(initialPath: string): Router {
   }, [pathname]);
   return router;
 }
-
-const Skeleton = styled('div')<{ height: number }>(({ theme, height }) => ({
-  backgroundColor: theme.palette.action.hover,
-  borderRadius: theme.shape.borderRadius,
-  height,
-  content: '" "',
-}));
 
 export default function DashboardLayoutBasic(props: any) {
   const { window } = props;
