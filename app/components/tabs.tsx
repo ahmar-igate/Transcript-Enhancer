@@ -24,7 +24,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 1 }}>{children}</Box>}
     </div>
   );
 }
@@ -88,6 +88,7 @@ export default function BasicTabs({ tab1, tab2, tab3 }: BasicTabsProps) {
         // width: "100%",
         p: 2,
         borderRadius: 2,
+        maxWidth: 1200,
         backgroundColor: theme.palette.background.paper,
       })}
     >
@@ -109,6 +110,7 @@ export default function BasicTabs({ tab1, tab2, tab3 }: BasicTabsProps) {
           // Override the flex container inside Tabs:
           "& .MuiTabs-flexContainer": {
             flexGrow: 0,
+            gap: theme.spacing(2), 
           },
           p: 1,
           width: "auto",
