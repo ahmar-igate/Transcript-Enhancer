@@ -10,25 +10,37 @@ import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import './globals.css'
 
 const NAVIGATION: Navigation = [
   { kind: 'header', title: 'Main items' },
-  { segment: 'dashboard', title: 'Create', icon: <DashboardIcon /> },
-  { segment: 'notes', title: 'My Notes', icon: <MenuBookRounded /> },
+  { segment: 'dashboard', title: 'Create', icon: <DashboardIcon fontSize="small" /> },
+  { segment: 'notes', title: 'My Notes', icon: <MenuBookRounded fontSize="small"/> },
   { kind: 'divider' },
-  { segment: 'Tutorial', title: 'Tutorial', icon: <LaunchIcon /> },
-  { segment: 'Feedback', title: 'Feedback', icon: <ReviewsIcon /> },
-  { segment: 'Subscription', title: 'Subscriptions', icon: <MonetizationOnIcon /> },
+  { segment: 'Tutorial', title: 'Tutorial', icon: <LaunchIcon fontSize="small"/> },
+  { segment: 'Feedback', title: 'Feedback', icon: <ReviewsIcon fontSize="small"/> },
+  { segment: 'Subscription', title: 'Subscriptions', icon: <MonetizationOnIcon fontSize="small"/> },
 ];
 
 const demoTheme = extendTheme({
   colorSchemes: { light: true, dark: true },
-  colorSchemeSelector: 'class',
+  colorSchemeSelector: "class",
   breakpoints: {
     values: { xs: 0, sm: 600, md: 600, lg: 1200, xl: 1536 },
   },
   components: {
-    MuiListItemText: { styleOverrides: { primary: { fontSize: '1rem' } } },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: { fontSize: "0.825rem" },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: '4px !important', // Set the min width for the icon
+        },
+      },
+    },
   },
 });
 

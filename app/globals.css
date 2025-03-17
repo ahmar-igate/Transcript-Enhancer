@@ -5,9 +5,16 @@
 
 }
 
+body{
+  line-height: 0;
+}
+
+
+
 @media (min-width: 1200px) {
   .css-f0z4ib-MuiContainer-root {
       max-width: none!important;
   }
 
 }
+
